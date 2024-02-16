@@ -1,4 +1,5 @@
 # Starter pipeline
+
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
@@ -10,8 +11,13 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      $date=$(Get-Date-UFormat '%A %B %d, %Y')
+      Write-Hots '##vso[task.setvariable variable=CurrentDate]$date"
+      Write-Host "Set CurrentDate to $date"
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
